@@ -1,5 +1,6 @@
 package ar.edu.ungs.prog2.smartgrids;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,43 +13,58 @@ public class SmartGrids implements ISmartGrids{
         this.plantas = new HashMap<>();
     }
 
-
+    //////////////////////////////AUXILIARES////////////////////////////////////////////
+    private void nombrePlantaYaExiste(String nombre) {
+    	if(plantas.containsKey(nombre)) {
+    	throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
+    	}
+    }
+    
+    private LocalDateTime parseoFecha(String fecha) {
+    	LocalDateTime fechaPuesta;
+        try {
+            fechaPuesta = LocalDateTime.parse(fecha);
+        } catch (Exception e) {
+            throw new RuntimeException("El formato de fecha y hora es inválido: " + fecha);
+        }
+        return fechaPuesta;
+    }
+    //////////////////////////////AUXILIARES////////////////////////////////////////////
 
     @Override
     public void registrarPlantaSolar(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, double superficieCubierta, int cantidadPaneles, double horasRadiacionDiaria) {
 
-    	if(plantas.containsKey(nombre)) {
-    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
-    	}
-    	
-    	PlantaSolar plantaNueva = new PlantaSolar(fuentePrimaria, fuentePrimaria, horasRadiacionDiaria, null, fuentePrimaria, horasRadiacionDiaria, horasRadiacionDiaria, cantidadPaneles, horasRadiacionDiaria);
+    	nombrePlantaYaExiste(nombre);
+    	LocalDateTime fechaParseada = parseoFecha(fechaHoraPuestaEnFuncionamiento);    	
+     	PlantaSolar plantaNueva = new PlantaSolar(nombre, direccion, capacidadMaxima, fechaParseada, fuentePrimaria, eficienciaPromedio, superficieCubierta, cantidadPaneles, horasRadiacionDiaria);
     	plantas.put(nombre, plantaNueva);
     }
 
     @Override
     public void registrarPlantaEolica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, int cantidadAerogeneradores, double alturaTorres, double velocidadMinimaViento) {
 
-    	if(plantas.containsKey(nombre)) {
-    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
-    	}
-    	
-    	PlantaEolica plantaNueva = new PlantaEolica(fuentePrimaria, fuentePrimaria, velocidadMinimaViento, null, fuentePrimaria, velocidadMinimaViento, cantidadAerogeneradores, velocidadMinimaViento, velocidadMinimaViento);
+    	nombrePlantaYaExiste(nombre);
+    	LocalDateTime fechaParseada = parseoFecha(fechaHoraPuestaEnFuncionamiento);
+    	PlantaEolica plantaNueva = new PlantaEolica(nombre, direccion, capacidadMaxima, fechaParseada, fuentePrimaria, eficienciaPromedio, cantidadAerogeneradores, alturaTorres, velocidadMinimaViento);
+    	plantas.put(nombre, plantaNueva);
     }
 
     @Override
     public void registrarPlantaHidraulica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, int cantidadTurbinas, double capacidadEmbalse) {
 
-    	if(plantas.containsKey(nombre)) {
-    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
-    	}
+    	nombrePlantaYaExiste(nombre);
+    	LocalDateTime fechaParseada = parseoFecha(fechaHoraPuestaEnFuncionamiento);
+    	PlantaHidraulica plantaNueva = new PlantaHidraulica(nombre, direccion, capacidadMaxima, fechaParseada, fuentePrimaria, eficienciaPromedio, cantidadTurbinas, capacidadEmbalse);
+    	plantas.put(nombre, plantaNueva);
     }
 
     @Override
     public void registrarPlantaTermica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String tipoCombustible, double objetivoEmisionesCo2PorHora, double capacidadAlmacenamientoCombustible) {
 
-    	if(plantas.containsKey(nombre)) {
-    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
-    	}
+    	nombrePlantaYaExiste(nombre);
+    	LocalDateTime fechaParseada = parseoFecha(fechaHoraPuestaEnFuncionamiento);
+    	PlantaTermica plantaNueva = new PlantaTermica(nombre, direccion, capacidadMaxima, fechaParseada, tipoCombustible, objetivoEmisionesCo2PorHora, capacidadAlmacenamientoCombustible);
+    	plantas.put(nombre, plantaNueva);
     }
 
     @Override
