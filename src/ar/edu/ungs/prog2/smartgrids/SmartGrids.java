@@ -1,6 +1,7 @@
 package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +70,13 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public List<String> consultarPlantas() {
-        return List.of();
+        List<String> resultado = new ArrayList<>();
+
+        for (Planta planta : plantas.values()) {
+            resultado.add(planta.getDetalleFormateado());
+        }
+        
+        return resultado;
     }
 
     @Override
