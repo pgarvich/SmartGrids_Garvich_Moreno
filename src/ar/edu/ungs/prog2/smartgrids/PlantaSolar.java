@@ -2,9 +2,7 @@ package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDateTime;
 
-public class PlantaSolar extends Planta{
-    private String fuentePrimaria;
-    private double eficienciaPromedio;
+public class PlantaSolar extends PlantaRenovable{
     private double superficieCubierta;
     private int cantidadPaneles;
     private double horasRadiacionDiaria;
@@ -13,9 +11,7 @@ public class PlantaSolar extends Planta{
                        String fuentePrimaria, double eficienciaPromedio, double superficieCubierta,
                        int cantidadPaneles, double horasRadiacionDiaria){
 
-        super(nombre, direccion, capacidadMaxima, fechaPuesta);
-        this.fuentePrimaria = fuentePrimaria;
-        this.eficienciaPromedio = eficienciaPromedio;
+        super(nombre, direccion, capacidadMaxima, fechaPuesta, fuentePrimaria, eficienciaPromedio);
         this.superficieCubierta = superficieCubierta;
         this.cantidadPaneles = cantidadPaneles;
         this.horasRadiacionDiaria = horasRadiacionDiaria;
@@ -24,7 +20,7 @@ public class PlantaSolar extends Planta{
 
     @Override
     public double capacidadMinimaCuota() { // Fórmula del test: capacidad \* eficiencia \* horasRadiacion / 24
-        return (getCapacidadMaxima() * eficienciaPromedio * horasRadiacionDiaria) / 24.0;
+        return (getCapacidadMaxima() * super.getEficienciaPromedio() * horasRadiacionDiaria) / 24.0;
     }
 
     @Override
@@ -32,8 +28,5 @@ public class PlantaSolar extends Planta{
         return m.getEnergiaGenerada() >= capacidadMinimaCuota();
     }
 
-    public String getFuentePrimaria() {
-        return fuentePrimaria;
-    }
 
 }

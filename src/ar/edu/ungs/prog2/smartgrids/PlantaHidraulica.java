@@ -2,7 +2,7 @@ package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDateTime;
 
-public class PlantaHidraulica extends Planta{
+public class PlantaHidraulica extends PlantaRenovable{
     private String fuentePrimaria;
     private double eficienciaPromedio;
     private int cantidadTurbinas;
@@ -13,16 +13,14 @@ public class PlantaHidraulica extends Planta{
                             String fuentePrimaria, double eficienciaPromedio, int cantidadTurbinas,
                             double capacidadEmbalse) {
 
-        super(nombre, direccion, capacidadMaxima, fechaPuesta);
-        this.fuentePrimaria = fuentePrimaria;
-        this.eficienciaPromedio = eficienciaPromedio;
+    	super(nombre, direccion, capacidadMaxima, fechaPuesta, fuentePrimaria, eficienciaPromedio);
         this.cantidadTurbinas = cantidadTurbinas;
         this.capacidadEmbalse = capacidadEmbalse;
     }
 
     @Override
     public double capacidadMinimaCuota() { // Fórmula del test: capacidad \* eficiencia
-         return getCapacidadMaxima() * eficienciaPromedio;
+         return getCapacidadMaxima() * super.getEficienciaPromedio();
     }
 
     @Override

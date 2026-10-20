@@ -43,7 +43,7 @@ public interface ISmartGrids {
             double capacidadAlmacenamientoCombustible);
 
     /*
-     * 1.b) Consultar plantas exstentes.
+     * 1.b) Consultar plantas existentes.
      * 
      * Que devuelve un lista con el detalle de cada planta:
      *  cada item debe respetar el formato: "{NOMBRE} ({ACTIVA|INACTIVA}): {FECHA_PUESTA_EN_FUNCIONAMIENTO}"

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SmartGrids implements ISmartGrids{
-    private Map<String, Planta> plantas;
+
+	private Map<String, Planta> plantas;
 
     public SmartGrids(){
         this.plantas = new HashMap<>();
@@ -16,21 +17,38 @@ public class SmartGrids implements ISmartGrids{
     @Override
     public void registrarPlantaSolar(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, double superficieCubierta, int cantidadPaneles, double horasRadiacionDiaria) {
 
+    	if(plantas.containsKey(nombre)) {
+    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
+    	}
+    	
+    	PlantaSolar plantaNueva = new PlantaSolar(fuentePrimaria, fuentePrimaria, horasRadiacionDiaria, null, fuentePrimaria, horasRadiacionDiaria, horasRadiacionDiaria, cantidadPaneles, horasRadiacionDiaria);
+    	plantas.put(nombre, plantaNueva);
     }
 
     @Override
     public void registrarPlantaEolica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, int cantidadAerogeneradores, double alturaTorres, double velocidadMinimaViento) {
 
+    	if(plantas.containsKey(nombre)) {
+    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
+    	}
+    	
+    	PlantaEolica plantaNueva = new PlantaEolica(fuentePrimaria, fuentePrimaria, velocidadMinimaViento, null, fuentePrimaria, velocidadMinimaViento, cantidadAerogeneradores, velocidadMinimaViento, velocidadMinimaViento);
     }
 
     @Override
     public void registrarPlantaHidraulica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, int cantidadTurbinas, double capacidadEmbalse) {
 
+    	if(plantas.containsKey(nombre)) {
+    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
+    	}
     }
 
     @Override
     public void registrarPlantaTermica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String tipoCombustible, double objetivoEmisionesCo2PorHora, double capacidadAlmacenamientoCombustible) {
 
+    	if(plantas.containsKey(nombre)) {
+    		throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
+    	}
     }
 
     @Override

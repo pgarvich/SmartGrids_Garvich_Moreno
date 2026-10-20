@@ -2,7 +2,7 @@ package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDateTime;
 
-public class PlantaTermica extends Planta{
+public class PlantaTermica extends PlantaNoRenovable{
     private String tipoCombustible;
     private double objetivoEmisionesCo2PorHora;
     private double capacidadAlmacenamientoCombustible;
@@ -12,9 +12,8 @@ public class PlantaTermica extends Planta{
                          String tipoCombustible, double objetivoEmisionesCo2PorHora,
                          double capacidadAlmacenamientoCombustible) {
 
-        super(nombre, direccion, capacidadMaxima, fechaPuesta);
+        super(nombre, direccion, capacidadMaxima, fechaPuesta, objetivoEmisionesCo2PorHora);
         this.tipoCombustible = tipoCombustible;
-        this.objetivoEmisionesCo2PorHora = objetivoEmisionesCo2PorHora;
         this.capacidadAlmacenamientoCombustible = capacidadAlmacenamientoCombustible;
     }
 
@@ -28,5 +27,6 @@ public class PlantaTermica extends Planta{
         if (m.getCo2Emitido() == null) {
             return false;
         }
+        
         return m.getEnergiaGenerada() >= capacidadMinimaCuota() && m.getCo2Emitido() < objetivoEmisionesCo2PorHora; }
 }
