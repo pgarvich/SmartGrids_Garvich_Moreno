@@ -15,6 +15,15 @@ public class SmartGrids implements ISmartGrids{
     }
 
     //////////////////////////////AUXILIARES////////////////////////////////////////////
+    
+    private Planta obtenerPlantaSegunNombre(String nombre) {
+        Planta planta = plantas.get(nombre);
+        if (planta == null) {
+            throw new RuntimeException("La planta con nombre '" + nombre + "' no existe.");
+        }
+        return planta;
+    }
+    
     private void nombrePlantaYaExiste(String nombre) {
     	if(plantas.containsKey(nombre)) {
     	throw new RuntimeException("Una planta con este nombre ya ha sido registrada.");
@@ -81,7 +90,10 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public double capacidadMinimaCuota(String nombre) {
-        return 0;
+    	
+    	Planta planta = obtenerPlantaSegunNombre(nombre);
+    	return planta.capacidadMinimaCuota();
+    	
     }
 
     @Override
