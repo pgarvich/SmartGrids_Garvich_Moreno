@@ -15,7 +15,8 @@ public abstract class Planta {
     private List <RegistroMonitoreo> monitoreos;
     private int horasActiva;
     private HashMap <LocalDateTime, LocalDateTime> periodosInactiva;
-
+    private LocalDateTime ultimaDesactivacion;
+    
     public Planta (String nombre, String direccion, double capacidadMaxima, LocalDateTime fechaPuestaEnFuncionamiento) {
 
     	if (nombre == null || nombre.trim().isEmpty()) {
@@ -38,6 +39,7 @@ public abstract class Planta {
         this.monitoreos = new ArrayList<>();
         this.horasActiva = 0;
         this.periodosInactiva = new HashMap<>();
+        this.ultimaDesactivacion = null;
 
     }
 
@@ -58,12 +60,22 @@ public abstract class Planta {
         return this.activa;
     }
 
-    public void activar() {
+    public void activar(LocalDateTime fechaHora) {
+        if (this.activa) {
+            throw new RuntimeException("La planta ya se encuentra activa.");
+        }
         this.activa = true;
+        // Guardamos el período completo: Inicio -> Fin
+        this.periodosInactiva.put(this.ultimaDesactivacion, fechaHora);
+        this.ultimaDesactivacion = null;
     }
 
-    public void desactivar() {
+    public void desactivar(LocalDateTime fechaHora) {
+        if (!this.activa) {
+            throw new RuntimeException("La planta ya se encuentra inactiva.");
+        }
         this.activa = false;
+        this.ultimaDesactivacion = fechaHora;
     }
 
 

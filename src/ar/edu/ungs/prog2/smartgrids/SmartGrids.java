@@ -98,17 +98,22 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public void activarPlanta(String nombre, String fechaHora) {
-
+        Planta planta = obtenerPlantaSegunNombre(nombre);
+        LocalDateTime fecha = parseoFecha(fechaHora);
+        planta.activar(fecha);
     }
 
     @Override
     public void desactivarPlanta(String nombre, String fechaHora) {
-
+        Planta planta = obtenerPlantaSegunNombre(nombre);
+        LocalDateTime fecha = parseoFecha(fechaHora);
+        planta.desactivar(fecha);
     }
 
     @Override
     public boolean estaActiva(String nombre) {
-        return false;
+        Planta planta = obtenerPlantaSegunNombre(nombre);
+        return planta.estaActiva();
     }
 
     @Override
