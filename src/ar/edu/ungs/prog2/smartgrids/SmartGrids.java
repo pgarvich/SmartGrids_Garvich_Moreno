@@ -64,7 +64,6 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public void registrarPlantaHidraulica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String fuentePrimaria, double eficienciaPromedio, int cantidadTurbinas, double capacidadEmbalse) {
-
     	nombrePlantaYaExiste(nombre);
     	LocalDateTime fechaParseada = parseoFecha(fechaHoraPuestaEnFuncionamiento);
     	PlantaHidraulica plantaNueva = new PlantaHidraulica(nombre, direccion, capacidadMaxima, fechaParseada, fuentePrimaria, eficienciaPromedio, cantidadTurbinas, capacidadEmbalse);
@@ -73,7 +72,6 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public void registrarPlantaTermica(String nombre, String direccion, double capacidadMaxima, String fechaHoraPuestaEnFuncionamiento, String tipoCombustible, double objetivoEmisionesCo2PorHora, double capacidadAlmacenamientoCombustible) {
-
     	nombrePlantaYaExiste(nombre);
     	LocalDateTime fechaParseada = parseoFecha(fechaHoraPuestaEnFuncionamiento);
     	PlantaTermica plantaNueva = new PlantaTermica(nombre, direccion, capacidadMaxima, fechaParseada, tipoCombustible, objetivoEmisionesCo2PorHora, capacidadAlmacenamientoCombustible);
@@ -154,7 +152,8 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public double totalGenerado(String nombre) {
-        return 0;
+        Planta planta = obtenerPlantaSegunNombre(nombre); // Lanza RuntimeException si no existe
+        return planta.totalGenerado();
     }
 
     @Override
