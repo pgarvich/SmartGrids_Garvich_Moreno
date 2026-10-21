@@ -1,8 +1,10 @@
 package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public abstract class Planta {
@@ -122,7 +124,10 @@ public abstract class Planta {
     // formatea el detalle de la planta segun el requerimeniento del tp: nombre, activa/inactiva, fecha puesta en funcionamiento
     public String getDetalleFormateado() {
         String estadoStr = this.activa ? "ACTIVA" : "INACTIVA";
-        return this.nombre + " (" + estadoStr + "): " + this.fechaPuestaEnFuncionamiento;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        String fechaFormateada = this.fechaPuestaEnFuncionamiento.format(formatter);
+        
+        return this.nombre + " (" + estadoStr + "): " + fechaFormateada;
     }
 
 

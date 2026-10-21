@@ -3,19 +3,22 @@ package ar.edu.ungs.prog2.smartgrids;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SmartGrids implements ISmartGrids{
 
-	private Map<String, Planta> plantas;
+	private LinkedHashMap<String, Planta> plantas;
 
     public SmartGrids(){
-        this.plantas = new HashMap<>();
+        this.plantas = new LinkedHashMap<>();
     }
 
     //////////////////////////////AUXILIARES////////////////////////////////////////////
-    
+    ///
+ 
+	
     private Planta obtenerPlantaSegunNombre(String nombre) {
         Planta planta = plantas.get(nombre);
         if (planta == null) {
@@ -117,11 +120,29 @@ public class SmartGrids implements ISmartGrids{
     }
 
     @Override
-    public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias) {
-
+    public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias) {/*
+    	Planta planta = obtenerPlantaSegunNombre(nombre);
+    	
+    	if(!estaActiva(nombre)) {
+    		throw new RuntimeException("La planta no se encuentra activa");
+    	}
+    	if(incidencias < 0) {
+    		throw new RuntimeException("Las incidencias no pueden ser negativas");
+    	}
+    	
+    	for (RegistroMonitoreo registro : planta.) {
+    		
+    	}
+    	
+    	LocalDateTime fechaMonitoreo = parseoFecha(fechaHora);
+    	verificarFecha(fechaMonitoreo, planta.getFechaPuestaEnFuncionamiento());
+    	
+    	RegistroMonitoreo monitoreo = new RegistroMonitoreo(fechaMonitoreo, energiaGenerada, incidencias);
+*/
     }
 
-    @Override
+
+	@Override
     public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias, double velocidadViento) {
 
     }

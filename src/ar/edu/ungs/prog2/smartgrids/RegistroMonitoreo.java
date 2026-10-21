@@ -6,6 +6,7 @@ public class RegistroMonitoreo {
     private LocalDateTime fechaHora;
     private double energiaGenerada;
     private int incidencias;
+    
 
     private Double velocidadViento;
     private Double co2Emitido;
