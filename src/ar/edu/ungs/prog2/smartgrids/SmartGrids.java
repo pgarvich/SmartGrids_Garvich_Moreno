@@ -118,35 +118,33 @@ public class SmartGrids implements ISmartGrids{
     }
 
     @Override
-    public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias) {/*
+    public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias) {
+    	
     	Planta planta = obtenerPlantaSegunNombre(nombre);
-    	
-    	if(!estaActiva(nombre)) {
-    		throw new RuntimeException("La planta no se encuentra activa");
-    	}
-    	if(incidencias < 0) {
-    		throw new RuntimeException("Las incidencias no pueden ser negativas");
-    	}
-    	
-    	for (RegistroMonitoreo registro : planta.) {
-    		
-    	}
-    	
-    	LocalDateTime fechaMonitoreo = parseoFecha(fechaHora);
-    	verificarFecha(fechaMonitoreo, planta.getFechaPuestaEnFuncionamiento());
-    	
-    	RegistroMonitoreo monitoreo = new RegistroMonitoreo(fechaMonitoreo, energiaGenerada, incidencias);
-*/
+    	LocalDateTime fecha = parseoFecha(fechaHora);
+    	RegistroMonitoreo registro = new RegistroMonitoreo(fecha, energiaGenerada, incidencias);
+    	planta.agregarMonitoreo(registro);
+
     }
 
 
 	@Override
     public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias, double velocidadViento) {
 
+		Planta planta = obtenerPlantaSegunNombre(nombre);
+		LocalDateTime fecha = parseoFecha(fechaHora);
+		RegistroMonitoreo registro = new RegistroMonitoreo(fecha, energiaGenerada, incidencias, velocidadViento);
+		planta.agregarMonitoreo(registro);
+		
     }
 
     @Override
     public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias, double co2Emitido, double combustibleUtilizado) {
+
+    	Planta planta = obtenerPlantaSegunNombre(nombre);
+    	LocalDateTime fecha = parseoFecha(fechaHora);
+    	RegistroMonitoreo registro = new RegistroMonitoreo(fecha, energiaGenerada, incidencias, co2Emitido, combustibleUtilizado);
+    	planta.agregarMonitoreo(registro);
 
     }
 

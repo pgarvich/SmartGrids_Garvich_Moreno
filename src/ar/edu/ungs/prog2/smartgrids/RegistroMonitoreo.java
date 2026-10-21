@@ -18,6 +18,7 @@ public class RegistroMonitoreo {
         this.fechaHora = fechaHora;
         this.energiaGenerada = energiaGenerada;
         this.incidencias = incidencias;
+        this.validarDatosBasicos(fechaHora, energiaGenerada, incidencias);
     }
 
 
@@ -28,6 +29,8 @@ public class RegistroMonitoreo {
             throw new RuntimeException("La velocidad del viento no puede ser negativa.");
         }
         this.velocidadViento = velocidadViento;
+        
+        this.validarDatosBasicos(fechaHora, energiaGenerada, incidencias);
     }
 
 
@@ -37,6 +40,7 @@ public class RegistroMonitoreo {
             throw new RuntimeException("Las emisiones de CO2 y el combustible no pueden ser negativos."); }
         this.co2Emitido = co2Emitido;
         this.combustibleUtilizado = combustibleUtilizado;
+        this.validarDatosBasicos(fechaHora, energiaGenerada, incidencias);
     }
 
     private void validarDatosBasicos(LocalDateTime fechaHora, double energia, int incidencias) {
