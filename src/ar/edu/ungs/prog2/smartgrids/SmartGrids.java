@@ -199,7 +199,22 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public Map<String, Integer> plantasRenovablesPorFuente() {
-        return Map.of();
+    	Map<String, Integer> renovablesPorFuente = new HashMap<>(Map.of(
+    		    "Sol", 0,
+    		    "Agua", 0,
+    		    "Viento", 0
+    		));
+    	
+    	for (Planta p : plantas.values()) {
+            if (p instanceof PlantaSolar) {
+                renovablesPorFuente.put("Sol", renovablesPorFuente.get("Sol") + 1);
+            } else if (p instanceof PlantaHidraulica) {
+                renovablesPorFuente.put("Agua", renovablesPorFuente.get("Agua") + 1);
+            } else if (p instanceof PlantaEolica) {
+                renovablesPorFuente.put("Viento", renovablesPorFuente.get("Viento") + 1);
+            }
+    	}
+        return renovablesPorFuente;
     }
 
     @Override

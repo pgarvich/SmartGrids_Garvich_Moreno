@@ -162,6 +162,4 @@ public abstract class Planta {
     public List<RegistroMonitoreo> getMonitoreos() { return monitoreos; }
 
 
-
-
 }
