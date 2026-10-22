@@ -106,7 +106,7 @@ public interface ISmartGrids {
 
     /*
      * 6) Devuelve un arreglo con 24 posiciones con las incidencias acumuladas 
-     *         para cada hora del dia.
+     *         para cada hora del dia. 
      * 
      * @throws RuntimeException si la planta no existe
      */

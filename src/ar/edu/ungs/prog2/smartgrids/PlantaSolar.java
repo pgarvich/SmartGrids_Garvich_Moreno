@@ -17,6 +17,15 @@ public class PlantaSolar extends PlantaRenovable{
         this.horasRadiacionDiaria = horasRadiacionDiaria;
 
     }
+    
+    @Override
+    public void agregarMonitoreo(RegistroMonitoreo m) {
+        // Si el registro trae velocidad de viento o datos térmicos, no corresponde a una solar
+        if (m.tieneDatosEolicos() || m.tieneDatosTermicos()) {
+            throw new RuntimeException("Tipo de monitoreo incorrecto para planta solar.");
+        }
+        super.agregarMonitoreo(m); // Ejecuta las validaciones comunes
+    }
 
     @Override
     public double capacidadMinimaCuota() { // Fórmula del test: capacidad \* eficiencia \* horasRadiacion / 24

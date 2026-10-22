@@ -156,6 +156,7 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public int[] incidenciasPorHora(String nombre) {
+        Planta planta = obtenerPlantaSegunNombre(nombre); // Lanza RuntimeException si no existe
         return new int[0];
     }
 

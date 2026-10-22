@@ -61,4 +61,16 @@ public class RegistroMonitoreo {
     public Double getVelocidadViento() { return velocidadViento; }
     public Double getCo2Emitido() { return co2Emitido; }
     public Double getCombustibleUtilizado() { return combustibleUtilizado; }
+
+
+	public boolean tieneDatosTermicos() {
+		// TODO Auto-generated method stub
+		return (co2Emitido != null || combustibleUtilizado != null);
+	}
+
+
+	public boolean tieneDatosEolicos() {
+		// TODO Auto-generated method stub
+		return (velocidadViento != null);
+	}
 }

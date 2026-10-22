@@ -21,6 +21,15 @@ public class PlantaEolica extends PlantaRenovable{
     }
 
     @Override
+    public void agregarMonitoreo(RegistroMonitoreo m) {
+        // Si el registro datos térmicos o no trae velocidad viento no sirve para plantas eolicas
+        if (!m.tieneDatosEolicos() || m.tieneDatosTermicos()) {
+            throw new RuntimeException("Tipo de monitoreo incorrecto para planta solar.");
+        }
+        super.agregarMonitoreo(m); // Ejecuta las validaciones comunes
+    }
+
+    @Override
     public double capacidadMinimaCuota() { // Fórmula del test: capacidad \* eficiencia
          return getCapacidadMaxima() * super.getEficienciaPromedio();
     }

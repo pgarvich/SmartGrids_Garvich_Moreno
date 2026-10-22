@@ -16,7 +16,17 @@ public class PlantaTermica extends PlantaNoRenovable{
         this.tipoCombustible = tipoCombustible;
         this.capacidadAlmacenamientoCombustible = capacidadAlmacenamientoCombustible;
     }
+    @Override
+    public void agregarMonitoreo(RegistroMonitoreo m) {
+        // Si el registro trae velocidad de viento o datos térmicos, no corresponde a una hidroelectica
+        if (m.tieneDatosEolicos() || !m.tieneDatosTermicos()) {
+            throw new RuntimeException("Tipo de monitoreo incorrecto para planta Hidraulica.");
+        }
+        super.agregarMonitoreo(m); // Ejecuta las validaciones comunes
+    }
 
+
+    
     @Override
     public double capacidadMinimaCuota() { // Fórmula del test: capacidad / 2
          return getCapacidadMaxima() / 2.0;
