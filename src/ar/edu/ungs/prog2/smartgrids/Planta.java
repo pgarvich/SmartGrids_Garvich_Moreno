@@ -53,7 +53,8 @@ public abstract class Planta {
 
     // evalua si un registro de monitoreo en particular cumplio su cuota
     public abstract boolean cumpleCuota(RegistroMonitoreo m);
-
+    
+   
 
 
     ////////////// METODOS DE ESTADO Y MONITOREO
@@ -80,6 +81,27 @@ public abstract class Planta {
         this.ultimaDesactivacion = fechaHora;
     }
 
+ // Devuelve histograma de cumplimiento entre fechas por hora, 24 posiciones
+    public int[] histogramaPlanta(LocalDateTime desde, LocalDateTime hasta) {
+        int[] histograma = new int[24];
+                
+        for (RegistroMonitoreo m : this.monitoreos) {
+            LocalDateTime fechaReg = m.getFechaHora();
+            
+            // Verificamos que esté dentro del rango de forma inclusiva (!isBefore y !isAfter)
+            boolean despuesDeOIgualDesde = !fechaReg.isBefore(desde);
+            boolean antesDeOIgualHasta = !fechaReg.isAfter(hasta);
+            
+            if (despuesDeOIgualDesde && antesDeOIgualHasta) {
+                if (cumpleCuota(m)) {
+                    int hora = fechaReg.getHour();
+                    histograma[hora] += 1;
+                }
+            }
+        }
+        
+        return histograma;
+    }
 
     // registro una nueva medicion horaria segun las reglas
     public void agregarMonitoreo(RegistroMonitoreo m) {
@@ -138,6 +160,8 @@ public abstract class Planta {
     public double getCapacidadMaxima() { return capacidadMaxima; }
     public LocalDateTime getFechaPuestaEnFuncionamiento() { return fechaPuestaEnFuncionamiento; }
     public List<RegistroMonitoreo> getMonitoreos() { return monitoreos; }
+
+
 
 
 }

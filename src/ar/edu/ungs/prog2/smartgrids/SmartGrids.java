@@ -1,5 +1,6 @@
 package ar.edu.ungs.prog2.smartgrids;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +42,28 @@ public class SmartGrids implements ISmartGrids{
             throw new RuntimeException("El formato de fecha y hora es inválido: " + fecha);
         }
         return fechaPuesta;
+    }
+    
+    private LocalDateTime parsearFechaInicio(String fechaStr) {
+        try {
+            if (fechaStr.length() == 10) { // Formato "yyyy-MM-dd"
+                return LocalDate.parse(fechaStr).atStartOfDay();
+            }
+            return LocalDateTime.parse(fechaStr);
+        } catch (Exception e) {
+            throw new RuntimeException("El formato de fecha es inválido: " + fechaStr);
+        }
+    }
+
+    private LocalDateTime parsearFechaFin(String fechaStr) {
+        try {
+            if (fechaStr.length() == 10) { // Formato "yyyy-MM-dd"
+                return LocalDate.parse(fechaStr).atTime(23, 59, 59);
+            }
+            return LocalDateTime.parse(fechaStr);
+        } catch (Exception e) {
+            throw new RuntimeException("El formato de fecha es inválido: " + fechaStr);
+        }
     }
     //////////////////////////////AUXILIARES////////////////////////////////////////////
 
@@ -162,7 +185,16 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public int[] histogramaCumplimiento(String nombre, String fechaDesde, String fechaHasta) {
-        return new int[0];
+        Planta planta = obtenerPlantaSegunNombre(nombre);
+
+        LocalDateTime desde = parsearFechaInicio(fechaDesde);
+        LocalDateTime hasta = parsearFechaFin(fechaHasta);
+        
+        if (hasta.isBefore(desde)) {
+            throw new RuntimeException("La fecha inicial no puede ser posterior a la final.");
+        }
+                
+        return planta.histogramaPlanta(desde, hasta);        
     }
 
     @Override

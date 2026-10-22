@@ -20,6 +20,7 @@ public class PlantaEolica extends PlantaRenovable{
         this.velocidadMinimaViento = velocidadMinimaViento;
     }
 
+    	
     @Override
     public void agregarMonitoreo(RegistroMonitoreo m) {
         // Si el registro datos térmicos o no trae velocidad viento no sirve para plantas eolicas

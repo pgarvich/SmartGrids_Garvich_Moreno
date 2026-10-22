@@ -18,6 +18,7 @@ public class PlantaHidraulica extends PlantaRenovable{
         this.capacidadEmbalse = capacidadEmbalse;
     }
     
+    
     @Override
     public void agregarMonitoreo(RegistroMonitoreo m) {
         // Si el registro trae velocidad de viento o datos térmicos, no corresponde a una hidroelectica
@@ -41,6 +42,5 @@ public class PlantaHidraulica extends PlantaRenovable{
     public String getFuentePrimaria() {
         return fuentePrimaria;
     }
-
 
 }

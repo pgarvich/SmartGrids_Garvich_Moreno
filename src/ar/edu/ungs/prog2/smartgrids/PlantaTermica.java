@@ -16,6 +16,9 @@ public class PlantaTermica extends PlantaNoRenovable{
         this.tipoCombustible = tipoCombustible;
         this.capacidadAlmacenamientoCombustible = capacidadAlmacenamientoCombustible;
     }
+    
+
+    
     @Override
     public void agregarMonitoreo(RegistroMonitoreo m) {
         // Si el registro trae velocidad de viento o datos térmicos, no corresponde a una hidroelectica
@@ -24,7 +27,6 @@ public class PlantaTermica extends PlantaNoRenovable{
         }
         super.agregarMonitoreo(m); // Ejecuta las validaciones comunes
     }
-
 
     
     @Override

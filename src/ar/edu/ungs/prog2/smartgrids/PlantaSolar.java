@@ -18,6 +18,7 @@ public class PlantaSolar extends PlantaRenovable{
 
     }
     
+    
     @Override
     public void agregarMonitoreo(RegistroMonitoreo m) {
         // Si el registro trae velocidad de viento o datos térmicos, no corresponde a una solar
@@ -36,6 +37,5 @@ public class PlantaSolar extends PlantaRenovable{
     public boolean cumpleCuota(RegistroMonitoreo m) {
         return m.getEnergiaGenerada() >= capacidadMinimaCuota();
     }
-
 
 }
