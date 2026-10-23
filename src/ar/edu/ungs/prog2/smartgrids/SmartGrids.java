@@ -136,6 +136,7 @@ public class SmartGrids implements ISmartGrids{
         return planta.estaActiva();
     }
 
+    	//Hidroeléctricas y Solares
     @Override
     public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias) {
     	
@@ -146,7 +147,7 @@ public class SmartGrids implements ISmartGrids{
 
     }
 
-
+    	//Eólicas
 	@Override
     public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias, double velocidadViento) {
 
@@ -156,7 +157,7 @@ public class SmartGrids implements ISmartGrids{
 		planta.agregarMonitoreo(registro);
 		
     }
-
+		//Térmicas
     @Override
     public void registrarMonitoreo(String nombre, String fechaHora, double energiaGenerada, int incidencias, double co2Emitido, double combustibleUtilizado) {
 

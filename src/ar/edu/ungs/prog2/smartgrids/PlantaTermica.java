@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 
 public class PlantaTermica extends PlantaNoRenovable{
     private String tipoCombustible;
-    private double objetivoEmisionesCo2PorHora;
     private double capacidadAlmacenamientoCombustible;
 
 
@@ -40,5 +39,5 @@ public class PlantaTermica extends PlantaNoRenovable{
             return false;
         }
         
-        return m.getEnergiaGenerada() >= capacidadMinimaCuota() && m.getCo2Emitido() < objetivoEmisionesCo2PorHora; }
+        return m.getEnergiaGenerada() >= capacidadMinimaCuota() && m.getCo2Emitido() < super.getObjetivoEmisiones(); }
 }
