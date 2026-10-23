@@ -260,7 +260,7 @@ public class SmartGrids implements ISmartGrids{
 
                     //si se monitoreo esa hora pero nunca alcanzo la velocidad minima
                     if (tieneRegistros && !alcanzoMinimo){
-                        bloquePlanta.append(String.format(" %02d: %d m/s\\n", hora, (int) maxVientoRegistrado)); //   %02d y %d agregan los valores
+                        bloquePlanta.append(String.format(" %02d: %d m/s\n", hora, (int) maxVientoRegistrado)); //   %02d y %d agregan los valores
                     }                                                                                            // de al lado, osea hora y maxVientoRegistrado
                 }                                                                                                // (es muy parecido a como se hace en C)
                 if (!bloquePlanta.isEmpty()){
@@ -290,7 +290,7 @@ public class SmartGrids implements ISmartGrids{
             for (int j = i + 1; j < lista.size(); j++){     // Ordeno la lista de mayor a menor por totalGenerado
                 if (lista.get(j).totalGenerado() > lista.get(i).totalGenerado()){
                     Planta aux = lista.get(i);
-                    lista.set(i, lista.get(i));
+                    lista.set(i, lista.get(j));
                     lista.set(j, aux);
                 }
             }
@@ -313,6 +313,17 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public List<String> plantasInactivasEn(String fechaHora) {
-        return List.of();
+    	ArrayList<String> listaDePlantasInactivasEnHora = new ArrayList<>();
+    	
+    	LocalDateTime fechaHoraParseada = parseoFecha(fechaHora);
+    	
+    	for(Planta p: plantas.values()) {
+    		if(p.estuvoInactivaEn(fechaHoraParseada)){
+    			listaDePlantasInactivasEnHora.add(p.getNombre());
+    		}
+    		
+    	}
+    	
+        return listaDePlantasInactivasEnHora;
     }
 }

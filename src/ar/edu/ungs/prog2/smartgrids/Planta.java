@@ -174,6 +174,25 @@ public abstract class Planta {
 		
 		return ret;
 	}
+	
+	public boolean estuvoInactivaEn(LocalDateTime fechaHora) {
+	    // Períodos ya cerrados (desactivada -> reactivada)
+	    for (Map.Entry<LocalDateTime, LocalDateTime> periodo : periodosInactiva.entrySet()) {
+	        LocalDateTime desde = periodo.getKey();
+	        LocalDateTime hasta = periodo.getValue();
+
+	        if (!fechaHora.isBefore(desde) && fechaHora.isBefore(hasta)) {
+	            return true;
+	        }
+	    }
+
+	    // Período abierto: desactivada y todavía no reactivada
+	    if (!this.activa && ultimaDesactivacion != null && !fechaHora.isBefore(ultimaDesactivacion)) {
+	        return true;
+	    }
+
+	    return false;
+	}
 
     //////////// GETTERS
 
@@ -182,6 +201,10 @@ public abstract class Planta {
     public double getCapacidadMaxima() { return capacidadMaxima; }
     public LocalDateTime getFechaPuestaEnFuncionamiento() { return fechaPuestaEnFuncionamiento; }
     public List<RegistroMonitoreo> getMonitoreos() { return monitoreos; }
+
+
+
+
 
 
 
