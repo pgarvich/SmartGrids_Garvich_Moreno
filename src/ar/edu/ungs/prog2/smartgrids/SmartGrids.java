@@ -232,9 +232,30 @@ public class SmartGrids implements ISmartGrids{
         return 0;
     }
 
+    private void ordenarPorEnergiaDescendente(List<Planta> lista){
+        for (int i = 0; i < lista.size() - 1; i++){
+            for (int j = i + 1; j < lista.size(); j++){     // Ordeno la lista de mayor a menor por totalGenerado
+                if (lista.get(j).totalGenerado() > lista.get(i).totalGenerado()){
+                    Planta aux = lista.get(i);
+                    lista.set(i, lista.get(i));
+                    lista.set(j, aux);
+                }
+            }
+        }
+    }
+
     @Override
     public List<String> plantasOrdenadasPorEnergiaGenerada() {
-        return List.of();
+        List<Planta> listaPlantas = new ArrayList<>(this.plantas.values());
+
+        ordenarPorEnergiaDescendente(listaPlantas);
+
+        List<String> resultado = new ArrayList<>();
+        for (Planta p : listaPlantas){
+            resultado.add(p.getNombre() + ": " + p.totalGenerado());
+        }
+
+        return resultado;
     }
 
     @Override
