@@ -165,6 +165,15 @@ public abstract class Planta {
         return borrados;
     }
 
+	public boolean nuncaCumplioCuota() {
+		// TODO Auto-generated method stub
+		boolean ret = true;
+		for(RegistroMonitoreo m: monitoreos) {
+			ret = ret && !cumpleCuota(m);
+		}
+		
+		return ret;
+	}
 
     //////////// GETTERS
 
@@ -173,6 +182,7 @@ public abstract class Planta {
     public double getCapacidadMaxima() { return capacidadMaxima; }
     public LocalDateTime getFechaPuestaEnFuncionamiento() { return fechaPuestaEnFuncionamiento; }
     public List<RegistroMonitoreo> getMonitoreos() { return monitoreos; }
+
 
 
 }

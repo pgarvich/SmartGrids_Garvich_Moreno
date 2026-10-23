@@ -215,7 +215,13 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public List<String> plantasQueNuncaCumplieronCuota() {
-        return List.of();
+    	ArrayList<String> plantasQueNoCumplieronNunca = new ArrayList<String>();
+    	for(Planta p: this.plantas.values()) {
+    		if(p.nuncaCumplioCuota()) {
+    			plantasQueNoCumplieronNunca.add(p.getNombre());
+    		}    		
+    	}
+    	return plantasQueNoCumplieronNunca;
     }
 
     @Override
