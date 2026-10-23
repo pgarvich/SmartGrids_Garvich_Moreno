@@ -224,7 +224,51 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public String horasSinVelocidadMinimaPorPlantaEolica() {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Plantas Eolicas: Horas con poco viento\n");
+
+        for (Planta p : this.plantas.values()){
+            if (p instanceof  PlantaEolica){    // filtro solamente entre plantas eolicas
+                PlantaEolica eolica = (PlantaEolica) p;
+                double velMinima = eolica.getVelocidadMinimaViento();
+
+                StringBuilder bloquePlanta = new StringBuilder();
+
+                for(int hora = 0; hora < 24; hora++){       // evaluo cada una de las 24 horas del dia
+                    boolean tieneRegistros = false;
+                    boolean alcanzoMinimo = false;
+                    double maxVientoRegistrado = -1;
+
+                    for (RegistroMonitoreo m : eolica.getMonitoreos()){     // veo si coincide una hora con la hora monitoreada
+                        if (m.getFechaHora().getHour() == hora){
+                            tieneRegistros = true;
+                            Double viento = m.getVelocidadViento();
+
+                            if (viento != null){
+                                if (viento >= velMinima){
+                                    alcanzoMinimo = true;       // si al menos una vez el viento alcanzo el minimo devuelve true
+                                }
+                                if (viento > maxVientoRegistrado){
+                                    maxVientoRegistrado = viento;
+                                }
+                            }
+                        }
+                    }
+
+                    //si se monitoreo esa hora pero nunca alcanzo la velocidad minima
+                    if (tieneRegistros && !alcanzoMinimo){
+                        bloquePlanta.append(String.format(" %02d: %d m/s\\n", hora, (int) maxVientoRegistrado)); //   %02d y %d agregan los valores
+                    }                                                                                            // de al lado, osea hora y maxVientoRegistrado
+                }                                                                                                // (es muy parecido a como se hace en C)
+                if (!bloquePlanta.isEmpty()){
+                    sb.append("- ").append(eolica.getNombre()).append(":  ").append((int) velMinima).append(" m/s\n");
+                    sb.append(bloquePlanta);
+                }   // aca basicamente agrego to.do al stringbuilder principal paso por paso. El resultado final deberia de quedar "05: 1 m/s" por ejemplo,
+                    // y el sb.append del final lo pone abajo del to.do en la lista de horas con poco viento
+            }
+        }
+
+        return sb.toString();
     }
 
     @Override
