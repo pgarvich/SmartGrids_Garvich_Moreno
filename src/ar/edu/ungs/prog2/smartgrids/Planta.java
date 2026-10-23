@@ -2,10 +2,7 @@ package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 
 public abstract class Planta {
 	private Integer ID;
@@ -150,6 +147,22 @@ public abstract class Planta {
         String fechaFormateada = this.fechaPuestaEnFuncionamiento.format(formatter);
         
         return this.nombre + " (" + estadoStr + "): " + fechaFormateada;
+    }
+
+    public int limpiarMonitoreosSinDatos(){
+        int borrados = 0;
+
+        Iterator<RegistroMonitoreo> it = this.monitoreos.iterator();
+        while (it.hasNext()){
+            RegistroMonitoreo m = it.next();
+
+            if (m.getEnergiaGenerada() == 0 && m.getIncidencias() == 0){
+                it.remove();
+                borrados++;
+            }
+        }
+
+        return borrados;
     }
 
 

@@ -2,11 +2,7 @@ package ar.edu.ungs.prog2.smartgrids;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SmartGrids implements ISmartGrids{
 
@@ -273,7 +269,13 @@ public class SmartGrids implements ISmartGrids{
 
     @Override
     public int limpiarMonitoreosSinDatos() {
-        return 0;
+        int totalBorrados = 0;
+
+        for (Planta p : this.plantas.values()){
+            totalBorrados += p.limpiarMonitoreosSinDatos();
+        }
+
+        return totalBorrados;
     }
 
     private void ordenarPorEnergiaDescendente(List<Planta> lista){
