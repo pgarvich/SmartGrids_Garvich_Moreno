@@ -193,6 +193,21 @@ public abstract class Planta {
 
 	    return false;
 	}
+	
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(getDetalleFormateado())
+	      .append(" | dirección: ").append(direccion)
+	      .append(" | capacidad máx: ").append(capacidadMaxima)
+	      .append(" | monitoreos: ").append(monitoreos.size())
+	      .append(" | total generado: ").append(totalGenerado())
+	      .append(" | períodos inactiva: ").append(periodosInactiva.size());
+	    if (!activa && ultimaDesactivacion != null) {
+	        sb.append(" (inactiva desde ").append(ultimaDesactivacion).append(")");
+	    }
+	    return sb.toString();
+	}
 
     //////////// GETTERS
 

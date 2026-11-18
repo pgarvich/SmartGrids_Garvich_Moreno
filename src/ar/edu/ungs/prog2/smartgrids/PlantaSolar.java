@@ -38,4 +38,9 @@ public class PlantaSolar extends PlantaRenovable{
         return m.getEnergiaGenerada() >= capacidadMinimaCuota();
     }
 
+    @Override
+    public String toString() {
+        return "[SOLAR] " + super.toString() + " | superficie: " + superficieCubierta
+                + " | paneles: " + cantidadPaneles + " | horas radiación: " + horasRadiacionDiaria;
+    }
 }

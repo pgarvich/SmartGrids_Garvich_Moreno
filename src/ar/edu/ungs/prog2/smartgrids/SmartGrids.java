@@ -326,4 +326,22 @@ public class SmartGrids implements ISmartGrids{
     	
         return listaDePlantasInactivasEnHora;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("=== SmartGrids: ").append(plantas.size()).append(" planta(s) ===\n");
+
+        if (plantas.isEmpty()) {
+            sb.append("(sin plantas registradas)\n");
+        }
+
+        for (Planta p : plantas.values()) {
+            sb.append("- ").append(p).append("\n");
+            for (RegistroMonitoreo m : p.getMonitoreos()) {
+                sb.append("      ").append(m).append("\n");
+            }
+        }
+        return sb.toString();
+    }
 }

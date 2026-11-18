@@ -22,7 +22,7 @@ public class PlantaTermica extends PlantaNoRenovable{
     public void agregarMonitoreo(RegistroMonitoreo m) {
         // Si el registro trae velocidad de viento o datos térmicos, no corresponde a una hidroelectica
         if (m.tieneDatosEolicos() || !m.tieneDatosTermicos()) {
-            throw new RuntimeException("Tipo de monitoreo incorrecto para planta Hidraulica.");
+            throw new RuntimeException("Tipo de monitoreo incorrecto para planta Térmica.");
         }
         super.agregarMonitoreo(m); // Ejecuta las validaciones comunes
     }
@@ -33,6 +33,12 @@ public class PlantaTermica extends PlantaNoRenovable{
          return getCapacidadMaxima() / 2.0;
         }
 
+    @Override
+    public String toString() {
+        return "[TERMICA] " + super.toString() + " | combustible: " + tipoCombustible
+                + " | almacenamiento: " + capacidadAlmacenamientoCombustible;
+    }
+    
     @Override
     public boolean cumpleCuota(RegistroMonitoreo m) { // Debe generar al menos la cuota Y emitir estrictamente menos CO2 que el objetivo
         if (m.getCo2Emitido() == null) {

@@ -21,4 +21,9 @@ public abstract class PlantaRenovable extends Planta{
     public double getEficienciaPromedio() {
     	return eficienciaPromedio;
     }
+    
+    @Override
+    public String toString() {
+        return super.toString() + " | fuente: " + fuentePrimaria + " | eficiencia: " + eficienciaPromedio;
+    }
 }

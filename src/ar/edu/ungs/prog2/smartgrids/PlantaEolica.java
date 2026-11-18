@@ -44,6 +44,12 @@ public class PlantaEolica extends PlantaRenovable{
         return velocidadMinimaViento;
     }
 
+    @Override
+    public String toString() {
+        return "[EOLICA] " + super.toString() + " | aerogeneradores: " + cantidadAerogeneradores
+                + " | altura torres: " + alturaTorres + " | viento mín: " + velocidadMinimaViento;
+    }
+
 
 
 }

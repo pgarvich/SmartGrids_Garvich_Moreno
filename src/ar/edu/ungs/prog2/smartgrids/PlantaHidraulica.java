@@ -38,6 +38,12 @@ public class PlantaHidraulica extends PlantaRenovable{
     public boolean cumpleCuota(RegistroMonitoreo m) {
         return m.getEnergiaGenerada() >= capacidadMinimaCuota();
     }
+    
+    @Override
+    public String toString() {
+        return "[HIDRAULICA] " + super.toString() + " | turbinas: " + cantidadTurbinas
+                + " | embalse: " + capacidadEmbalse;
+    }
 
     public String getFuentePrimaria() {
         return fuentePrimaria;

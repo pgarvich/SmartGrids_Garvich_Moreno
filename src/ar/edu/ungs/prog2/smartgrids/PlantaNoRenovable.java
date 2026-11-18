@@ -14,5 +14,10 @@ public abstract class PlantaNoRenovable extends Planta{
 	public double getObjetivoEmisiones() {
 		return objetivoEmisiones;
 	}
+	
+	@Override
+	public String toString() {
+	    return super.toString() + " | objetivo CO2/h: " + objetivoEmisiones;
+	}
 
 }

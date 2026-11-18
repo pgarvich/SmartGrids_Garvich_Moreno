@@ -1,0 +1,52 @@
+--- Inicio INICIO ---
+=== SmartGrids: 0 planta(s) ===
+(sin plantas registradas)
+
+
+--- Inicio Plantas ---
+Plantas registradas: []
+
+--- Inicio FIN ---
+
+Registrando plantas...
+Plantas: [Solar Norte (ACTIVA): 2026-10-08T00:00:00, Eolica Sur (ACTIVA): 2026-10-08T00:00:00]
+
+Registrando monitoreos...
+
+--- A mitad de la simulacion INICIO ---
+=== SmartGrids: 2 planta(s) ===
+- [SOLAR] Solar Norte (ACTIVA): 2026-10-08T00:00:00 | dirección: Ruta 1 | capacidad máx: 1000.0 | monitoreos: 2 | total generado: 500.0 | períodos inactiva: 0 | fuente: Sol | eficiencia: 0.8 | superficie: 1500.0 | paneles: 12 | horas radiación: 10.0
+      2026-10-08T10:00 | energía: 0.0 | incidencias: 0
+      2026-10-08T11:00 | energía: 500.0 | incidencias: 1
+- [EOLICA] Eolica Sur (ACTIVA): 2026-10-08T00:00:00 | dirección: Ruta 2 | capacidad máx: 800.0 | monitoreos: 1 | total generado: 200.0 | períodos inactiva: 0 | fuente: Viento | eficiencia: 0.75 | aerogeneradores: 4 | altura torres: 80.0 | viento mín: 5.0
+      2026-10-08T10:00 | energía: 200.0 | incidencias: 0 | viento: 3.0 m/s
+
+
+--- A mitad de la simulacion Plantas ---
+Plantas registradas: [Solar Norte (ACTIVA): 2026-10-08T00:00:00, Eolica Sur (ACTIVA): 2026-10-08T00:00:00]
+
+--- A mitad de la simulacion FIN ---
+
+Limpiando monitoreos sin datos...
+Registros eliminados(1): 1
+Energia solar(500): 500.0
+Orden por energia: [Solar Norte: 500.0, Eolica Sur: 200.0]
+
+Desactivando Eolica Sur...
+Plantas inactivas: [Eolica Sur]
+
+Intentando monitorear planta desactivada...
+Fallo esperado: No se pueden agregar registros a una planta inactiva.
+
+--- Final INICIO ---
+=== SmartGrids: 2 planta(s) ===
+- [SOLAR] Solar Norte (ACTIVA): 2026-10-08T00:00:00 | dirección: Ruta 1 | capacidad máx: 1000.0 | monitoreos: 1 | total generado: 500.0 | períodos inactiva: 0 | fuente: Sol | eficiencia: 0.8 | superficie: 1500.0 | paneles: 12 | horas radiación: 10.0
+      2026-10-08T11:00 | energía: 500.0 | incidencias: 1
+- [EOLICA] Eolica Sur (INACTIVA): 2026-10-08T00:00:00 | dirección: Ruta 2 | capacidad máx: 800.0 | monitoreos: 1 | total generado: 200.0 | períodos inactiva: 0 (inactiva desde 2026-10-08T12:00) | fuente: Viento | eficiencia: 0.75 | aerogeneradores: 4 | altura torres: 80.0 | viento mín: 5.0
+      2026-10-08T10:00 | energía: 200.0 | incidencias: 0 | viento: 3.0 m/s
+
+
+--- Final Plantas ---
+Plantas registradas: [Solar Norte (ACTIVA): 2026-10-08T00:00:00, Eolica Sur (INACTIVA): 2026-10-08T00:00:00]
+
+--- Final FIN ---

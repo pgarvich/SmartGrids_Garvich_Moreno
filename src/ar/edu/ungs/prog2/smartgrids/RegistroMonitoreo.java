@@ -73,4 +73,23 @@ public class RegistroMonitoreo {
 		// TODO Auto-generated method stub
 		return (velocidadViento != null);
 	}
+	
+	@Override
+	public String toString() {
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(fechaHora)
+	      .append(" | energía: ").append(energiaGenerada)
+	      .append(" | incidencias: ").append(incidencias);
+
+	    if (velocidadViento != null) {
+	        sb.append(" | viento: ").append(velocidadViento).append(" m/s");
+	    }
+	    if (co2Emitido != null) {
+	        sb.append(" | CO2: ").append(co2Emitido);
+	    }
+	    if (combustibleUtilizado != null) {
+	        sb.append(" | combustible: ").append(combustibleUtilizado);
+	    }
+	    return sb.toString();
+	}
 }
